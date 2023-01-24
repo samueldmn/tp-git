@@ -228,7 +228,7 @@ Il faut que je commit les changement du fichier1.md avant de merge
 Lancer un git status
 git status
 Que doit-on faire si on veut annuler la fusion en cours ?
-on doit faire un git restore <nom du fichier>
+on doit faire un git restore <nom du fichier> ou git reset
 
 On veut résoudre le conflit. Plusieurs possibilités :
 Conserver uniquement les modifications faites dans fonctionnalite3
@@ -255,3 +255,4 @@ Ne pas réutiliser une branche qui a déjà été intégrée pour démarrer une 
 Nouvelle tâche ? => nouvelle branche à partir d'un commit de la branche d'intégration (en général le plus récent)
 Tâche terminée ? => fusion dans la branche d'intégration et suppression de la branche
 Supprimer les trois branches fonctionnalitex (attention : on ne peut pas supprimer une branche sur laquelle on est)
+git branch --delete <nom de la branch>
