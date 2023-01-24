@@ -140,39 +140,96 @@ Afficher la liste des fichiers du répertoire
 ls
 
 Pourquoi les deux sorties sont-elles différentes ? Les fichiers ont-ils disparus ?
-
+La sortie est différente car les autre fichier on etait crée dans la branche master et non dans la fonctionnalité1
+il n'ont pas disparu juste les branche ne sont pas liée entre elle
 
 Créer une nouvelle branche fonctionnalite2
 git branch fonctionnalite2
 
 Cette branche ne va pas avoir toutes les données incluses dans fonctionnalite1. Pourquoi ?
+car la branch crée est indépendante des autres
 
 Qu'aurait-il fallu faire si on avait souhaité démarrer la branche fonctionnalite2 en intégrant les modifications récentes de fonctionnalite1 ?
+il aurrait fallu faire un git rebase fonctionnalite1
+
 Se déplacer sur la nouvelle branche fonctionnalite2
+git checkout fonctionnalite2
+
 Créer un nouveau fichier fichier5.md
+touch fichier5.md
+
+
 Faire un commit intégrant cette ajout : "Ajout fichier5.md"
+git commit fichier5.md -m "ajout fichier5.md"
+
 Entrer la commande git log --oneline --decorate --graph --all pour visualiser, sur le terminal, le graphe des commits sur toutes les branches
 Noter la « déviation » entre les deux branches, à partir de la branche master
+la déviation est faite car les commit vont dans des branch différente
+
 Installer l'extension VS Code Git Graph et visualiser le graphe actuel des commits à l'aide de cette extension
+
 Sur cette représentation, que représente les points ?
+les point correspondent a des commit
+
 Comment voit-on sur quelle branche on est actuellement ?
+avec les point qui à un interieur vide
+
 On considère que la branche originale (master ou main) est la branche d'intégration, c'est-à-dire celle qui va contenir l'historique de toutes les modifications développées au fur et à mesure dans les branches annexes
 On va maintenant fusionner la branche fonctionnalite1, qui est terminée, avec la branche d'intégration
+
 Se déplacer sur la branche master
+git checkout master
+
 Noter le changement dans l'onglet Git Graph
+on est maintenant dans la branch master
+
 Fusionner avec la branche fonctionnalite1
+git merge fonctionnalite1
+
 Noter le changement dans l'onglet Git Graph. Que signifie la mention Fast-forward indiquée par la sortie de la commande ?
+master est maintenant dans la branch fonctionnalite1
+La mention Fast-forward indique que la branch pointe vers la branche cible. les branches ne sont pas réellement merge
+
 On veut maintenant fusionner fonctionnalite2 dans la branche d'intégration (master)
+git merge fonctionnalite2
+
 Effectuer cette fusion
 Noter le changement dans l'onglet Git Graph. Que signifie la mention Merge made by the ... strategy indiquée par la sortie de la commande ?
+sur git graph master est fusionné avec fonctionnalite2
+La mention Merge made by the ... stategie signifie que c'est la stratégie ort qui a etais utilisé. il y en a d'autre
+
 Quelle est la différence fondamentale avec la fusion précédente ?
+la différence est que les branche on réellemnt fusionné entre elle contrairement au précédent qui vas jsute pointé la branch vers la branch cible
+
 Créer une nouvelle branche fonctionnalite3, se déplacer dessus, et modifier le fichier fichier1.md en y ajoutant une ligne de texte. Committer : "Modification fichier1 pour fonctionnalité 3"
+git branch fonctionnalite3
+git checkout fonctionnalite3
+nano fichier1.md
+git commit fichier1.md -m "Modification fichier1 pour fonctionnalité 3"
+
 Comment utiliser Git Graph pour qu'il nous montre les différences entre l'ancienne version de fichier1.md et la version courante que l'on vient de committer ?
+ il suffit de selectionner l'ancien commit du fichier
+
 Repartir sur master, et modifier fichier1.md en y ajoutant aussi une ligne (différente de celle qu'on a ajoutée sur l'autre branche)
+git checkout master
+nano <message>
 Tenter de fusionner la branche fonctionnalite3 avec master
+git merge fonctionnalite3
+
 Que se passe-t-il et pourquoi ?
+error: Your local changes to the following files would be overwritten by merge:
+        fichier1.md
+Please commit your changes or stash them before you merge.
+Aborting
+Updating ac9fe17..62d1e20
+
+Il faut que je commit les changement du fichier1.md avant de merge
+
 Lancer un git status
+git status
 Que doit-on faire si on veut annuler la fusion en cours ?
+on doit faire un git restore <nom du fichier>
+
 On veut résoudre le conflit. Plusieurs possibilités :
 Conserver uniquement les modifications faites dans fonctionnalite3
 Conserver uniquement les modifications faites dans master
